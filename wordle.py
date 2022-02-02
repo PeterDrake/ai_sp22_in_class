@@ -5,8 +5,14 @@ legal_words = []
 with open('legal_words.txt') as f:
     for line in f:
         legal_words.append(line.strip())
-# word = random.choice(legal_words)
-# print(word)
+
+mystery_words = []
+with open('mystery.txt') as f:
+    for line in f:
+        mystery_words.append(line.strip())
+
+word = random.choice(mystery_words)
+
 i=0
 while i < 6:
     i+=1
