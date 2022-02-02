@@ -7,12 +7,13 @@ with open('legal_words.txt') as f:
         legal_words.append(line.strip())
 # word = random.choice(legal_words)
 # print(word)
-
-for i in range(6):
+i=0
+while i < 6:
+    i+=1
     guess = input('Your guess: ')
     if not guess in legal_words:
         print("That's not a legal word")
-        i = i - 1  # Needs work!
+        i-=1
         continue
     # Find letters in word that were not perfectly guessed
     imperfect = ''
