@@ -1,5 +1,4 @@
 import random
-word = 'knoll'
 
 legal_words = []
 with open('legal_words.txt') as f:
@@ -13,13 +12,13 @@ with open('mystery.txt') as f:
 
 word = random.choice(mystery_words)
 
-i=0
+i = 0
 while i < 6:
-    i+=1
+    i += 1
     guess = input('Your guess: ')
-    if not guess in legal_words:
+    if guess not in legal_words:
         print("That's not a legal word")
-        i-=1
+        i -= 1
         continue
     # Find letters in word that were not perfectly guessed
     imperfect = ''
