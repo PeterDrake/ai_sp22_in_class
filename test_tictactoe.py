@@ -8,3 +8,8 @@ class Test(TestCase):
         before = 'XOX......'
         after = successor(before, 'O', 5)
         self.assertEqual('XOX..O...', after)
+
+    def test_generates_legal_moves(self):
+        before = '.OXO...X.'
+        moves = legal_moves(before, 'X')
+        self.assertEqual((0, 4, 5, 6, 8), moves)
