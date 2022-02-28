@@ -2,6 +2,8 @@ from unittest import TestCase
 from tictactoe import *
 
 
+
+
 class Test(TestCase):
 
     def test_generates_successor(self):
@@ -18,3 +20,18 @@ class Test(TestCase):
         board = 'XXXO.O.O.'
         result = winner(board)
         self.assertEqual(1, result)
+
+    def test_finds_value_of_end_of_game(self):
+        board = 'XO.OX...X'
+        result = value_for_o(board)
+        self.assertEqual(1, result)
+
+    def test_looks_ahead_one_move(self):
+        board = 'XX.OO..X.'
+        result = value_for_o(board)
+        self.assertEqual(-1, result)
+
+    def test_looks_ahead_multiple_moves(self):
+        board = '.XX.O.OX.'
+        result = value_for_o(board)
+        self.assertEqual(-1, result)

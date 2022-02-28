@@ -35,3 +35,26 @@ def winner(board):
             if board[a] == 'O':
                 return -1
     return 0
+
+
+def value_for_o(board):
+    """
+    :param board: A string
+    :return: The value of board if it is O's turn.
+    """
+    # TODO Check that value of winner is 0 -- the game may already be over!
+    moves = legal_moves(board, 'O')
+    if moves:
+        return min([value_for_x(successor(board, 'O', move)) for move in moves])
+    return winner(board)
+
+
+def value_for_x(board):
+    """
+    :param board: A string
+    :return: The value of board if it is O's turn.
+    """
+    moves = legal_moves(board, 'X')
+    if moves:
+        return max([value_for_o(successor(board, 'X', move)) for move in moves])
+    return winner(board)
