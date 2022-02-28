@@ -13,3 +13,8 @@ class Test(TestCase):
         before = '.OXO...X.'
         moves = legal_moves(before, 'X')
         self.assertEqual((0, 4, 5, 6, 8), moves)
+
+    def test_finds_win_for_X(self):
+        board = 'XXXO.O.O.'
+        result = winner(board)
+        self.assertEqual(1, result)

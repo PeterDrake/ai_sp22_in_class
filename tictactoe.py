@@ -18,3 +18,11 @@ def legal_moves(board, player):
     :return: A sequence of legal moves (indices) for player from baord
     """
     return tuple([i for i in range(len(board)) if board[i] == '.'])
+
+
+def winner(board):
+    """
+    :param board: A string
+    :return: 1 if 'X' has won, -1 if 'O' has won, 0 otherwise
+    """
+    pass
