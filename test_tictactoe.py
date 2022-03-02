@@ -2,8 +2,6 @@ from unittest import TestCase
 from tictactoe import *
 
 
-
-
 class Test(TestCase):
 
     def test_generates_successor(self):
@@ -35,3 +33,8 @@ class Test(TestCase):
         board = '.XX.O.OX.'
         result = value_for_o(board)
         self.assertEqual(-1, result)
+
+    def test_does_not_find_legal_moves_when_game_is_over(self):
+        board = 'XXXO.O.O.'
+        result = legal_moves(board, 'X')
+        self.assertEqual((), result)

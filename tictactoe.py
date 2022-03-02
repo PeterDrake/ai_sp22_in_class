@@ -15,8 +15,10 @@ def legal_moves(board, player):
     """
     :param board: A string
     :param player: 'X' or 'O'
-    :return: A sequence of legal moves (indices) for player from baord
+    :return: A sequence of legal moves (indices) for player from board
     """
+    if winner(board) != 0:
+        return ()
     return tuple([i for i in range(len(board)) if board[i] == '.'])
 
 
@@ -42,10 +44,6 @@ def value_for_o(board):
     :param board: A string
     :return: The value of board if it is O's turn.
     """
-    # TODO Check that value of winner is 0 -- the game may already be over!
-    # This is a subtle bug. If search continues beyond the end of the game, we may end up evaluating
-    # states with more than one winning line; it would be somewhat arbitrary which one was found first
-    # One solution: change legal moves to return no moves if the game is over
     moves = legal_moves(board, 'O')
     if moves:
         return min([value_for_x(successor(board, 'O', move)) for move in moves])
@@ -61,3 +59,17 @@ def value_for_x(board):
     if moves:
         return max([value_for_o(successor(board, 'X', move)) for move in moves])
     return winner(board)
+
+
+# def even(n):
+#     if n == 0:
+#         return True
+#     return odd(n - 1)
+#
+#
+# def odd(n):
+#     if n == 0:
+#         return False
+#     return even(n - 1)
+#
+# print(even(4))
