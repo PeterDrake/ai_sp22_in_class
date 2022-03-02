@@ -39,37 +39,73 @@ def winner(board):
     return 0
 
 
-def value_for_o(board):
+def opposite(player):
+    if player == 'X':
+        return 'O'
+    return 'X'
+
+
+def value(board, player):
     """
     :param board: A string
-    :return: The value of board if it is O's turn.
+    :param player: 'X' or 'O'
+    :return: The value of board if it is player's turn.
     """
-    moves = legal_moves(board, 'O')
+    moves = legal_moves(board, player)
     if moves:
-        return min([value_for_x(successor(board, 'O', move)) for move in moves])
+        if player == 'X':
+            best = max
+        else:
+            best = min
+        return best([value(successor(board, player, move), opposite(player)) for move in moves])
     return winner(board)
 
 
-def value_for_x(board):
+def less(x, y):
+    return x < y
+
+
+def greater(x, y):
+    return x > y
+
+
+def best_move(board, player):
     """
     :param board: A string
-    :return: The value of board if it is X's turn.
+    :param player: 'X' or 'O'
+    :return: The best move (index) for player
     """
-    moves = legal_moves(board, 'X')
+    moves = legal_moves(board, player)
     if moves:
-        return max([value_for_o(successor(board, 'X', move)) for move in moves])
+        if player == 'X':
+            best_value = -2
+            better = greater
+        else:
+            best_value = 2
+            better = less
+        for move in moves:
+            v = value(successor(board, player, move), opposite(player))
+            if better(v, best_value):
+                best_value = v
+                result = move
+        return result
     return winner(board)
 
 
-# def even(n):
-#     if n == 0:
-#         return True
-#     return odd(n - 1)
-#
-#
-# def odd(n):
-#     if n == 0:
-#         return False
-#     return even(n - 1)
-#
-# print(even(4))
+board = INITIAL_STATE
+player = 'X'
+while legal_moves(board, player):
+    if player == 'X':
+        move = best_move(board, player)
+    else:
+        move = int(input('Your move (0-8): '))
+    board = successor(board, player, move)
+    print(f'{board[0:3]}\n{board[3:6]}\n{board[6:9]}\n')
+    player = opposite(player)
+w = winner(board)
+if w == 1:
+    print('X wins!')
+elif w == -1:
+    print('O wins!')
+else:
+    print('Tie.')
