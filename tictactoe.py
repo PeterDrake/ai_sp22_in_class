@@ -109,3 +109,5 @@ elif w == -1:
     print('O wins!')
 else:
     print('Tie.')
+
+# TODO: This code to play shouldn't run when we import this file into tests
