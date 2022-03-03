@@ -89,7 +89,6 @@ def best_move(board, player):
                 best_value = v
                 result = move
         return result
-    return winner(board)
 
 
 board = INITIAL_STATE
