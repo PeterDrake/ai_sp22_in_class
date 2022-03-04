@@ -91,22 +91,27 @@ def best_move(board, player):
         return result
 
 
-board = INITIAL_STATE
-player = 'X'
-while legal_moves(board, player):
-    if player == 'X':
-        move = best_move(board, player)
+def main():
+    board = INITIAL_STATE
+    player = 'X'
+    while legal_moves(board, player):
+        if player == 'X':
+            move = best_move(board, player)
+        else:
+            move = int(input('Your move (0-8): '))
+        board = successor(board, player, move)
+        print(f'{board[0:3]}\n{board[3:6]}\n{board[6:9]}\n')
+        player = opposite(player)
+    w = winner(board)
+    if w == 1:
+        print('X wins!')
+    elif w == -1:
+        print('O wins!')
     else:
-        move = int(input('Your move (0-8): '))
-    board = successor(board, player, move)
-    print(f'{board[0:3]}\n{board[3:6]}\n{board[6:9]}\n')
-    player = opposite(player)
-w = winner(board)
-if w == 1:
-    print('X wins!')
-elif w == -1:
-    print('O wins!')
-else:
-    print('Tie.')
+        print('Tie.')
+
+
+if __name__ == '__main__':
+    main()
 
 # TODO: This code to play shouldn't run when we import this file into tests
