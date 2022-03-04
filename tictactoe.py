@@ -113,5 +113,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# TODO: This code to play shouldn't run when we import this file into tests
